@@ -1,0 +1,52 @@
+# vpc variables
+vpc_cidr="192.168.0.0/16"
+
+# dev-subnet1 variables
+dev_cidr= "192.168.1.0/24"
+dev_availability_zone= "ap-south-1a"
+
+# prod-subnet variables
+prod_cidr= "192.168.2.0/24"
+prod_availability_zone= "ap-south-1b"
+
+# public route table variables
+public_cidr="0.0.0.0/0"
+
+
+# security_groups variables
+sg_name="Web"
+http_description= "HTTP From VPC"
+http_port= 80
+ssh_description="SSH From VPC"
+ssh_port=22
+protocol="tcp"
+allowed_cidrs=["0.0.0.0/0"]
+egress_port= 0
+eg_protocal= "-1"
+sg_tag_name="Web-SG"
+
+
+# s3 bucket variables
+bucket= "terraform-s3-vpc-test1628"
+
+# ec2_instance variables
+ami="ami-01a00762f46d584a1"
+instance_type= "t3.micro"
+user_data ="userdata.sh"
+
+
+# ALB variables
+alb_name="myalb"
+alb_type="application"
+alb_tag_name= "web"
+
+# target group variables
+tg_name="myTG"
+tg_port=80
+tg_protocol="HTTP"
+tg_health_check_path="/"
+tg_health_check_port="traffic-port"
+
+attach_port=80
+listener_port=80
+listener_protocol="HTTP"
