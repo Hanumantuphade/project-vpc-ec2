@@ -3,6 +3,14 @@
 variable "vpc_cidr" {
   type = string
 }
+variable "vpc_tag_name" {
+  type = string
+}
+
+#internet getway
+variable "igw_tag_name" {
+  type = string
+}
 
 # Dev subnet variables
 variable "dev_cidr" {
@@ -13,6 +21,12 @@ variable "dev_availability_zone" {
   type = string
 }
 
+variable "dev_tag_name" {
+  type = string
+}
+
+
+
 # Prod subnet variables
 variable "prod_cidr" {
   type = string
@@ -22,8 +36,16 @@ variable "prod_availability_zone" {
   type = string
 }
 
+variable "prod_tag_name" {
+  type = string
+}
+
 # Public route table variables
 variable "public_cidr" {
+  type = string
+} 
+
+variable "rt_tag_name" {
   type = string
 }
 
@@ -85,6 +107,15 @@ variable "instance_type" {
 variable "user_data" {
   type = string
 }
+
+variable "web1_tag_name" {
+  type = string
+}
+
+variable "web2_tag_name" {
+  type = string
+}
+
 
 # Application Load Balancer variables
 variable "alb_name" {

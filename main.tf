@@ -1,11 +1,18 @@
 # Creating VPC
 resource "aws_vpc" "myvpc" {
   cidr_block = var.vpc_cidr
+  tags = {
+    Name = var.vpc_tag_name
+  }
 }
 
 #Creating Internet Gateway
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.myvpc.id
+  tags = {
+    Name = var.igw_tag_name
+  }
+
 }
 
 #Creating Subnets
@@ -14,6 +21,9 @@ resource "aws_subnet" "dev" {
   cidr_block              = var.dev_cidr
   availability_zone       = var.dev_availability_zone
   map_public_ip_on_launch = true
+  tags = {
+    Name = var.dev_tag_name
+  }
 }
 
 resource "aws_subnet" "prod" {
@@ -21,6 +31,9 @@ resource "aws_subnet" "prod" {
   cidr_block              = var.prod_cidr
   availability_zone       = var.prod_availability_zone
   map_public_ip_on_launch = true
+  tags = {
+    Name = var.prod_tag_name
+  }
 }
 
 
@@ -28,7 +41,9 @@ resource "aws_subnet" "prod" {
 #Creating Route Tables
 resource "aws_route_table" "public-RT" {
   vpc_id = aws_vpc.myvpc.id
-
+  tags = {
+    Name = var.rt_tag_name
+  }
   route {
     cidr_block = var.public_cidr
     gateway_id = aws_internet_gateway.igw.id
@@ -90,6 +105,9 @@ resource "aws_instance" "webserver1" {
   vpc_security_group_ids = [aws_security_group.webSg.id]
   subnet_id              = aws_subnet.dev.id
   user_data              = filebase64(var.user_data)
+  tags = {
+    Name = var.web1_tag_name
+  }
 }
 
 resource "aws_instance" "webserver2" {
@@ -98,6 +116,9 @@ resource "aws_instance" "webserver2" {
   vpc_security_group_ids = [aws_security_group.webSg.id]
   subnet_id              = aws_subnet.prod.id
   user_data              = filebase64(var.user_data)
+  tags = {
+    Name = var.web2_tag_name
+  }
 }
 
 #create alb
